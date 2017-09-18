@@ -34,7 +34,7 @@
           <div class="title">常用商品</div>
           <div class="often-list">
             <ul>
-              <li v-for="item in dataOften">
+              <li v-for="item in dataOften" class="animated pulse">
                 <span>{{item.goodsName}}</span>
                 <span class="oprice">￥{{item.price}}元</span>
               </li>
@@ -47,7 +47,7 @@
             <el-tab-pane label="汉堡">
               <div>
                 <ul class="foodCook">
-                  <li v-for="foods in foodsDate">
+                  <li v-for="foods in foodsDate1" class="animated bounceInRight">
                     <span class="foodsImg">
                       <img :src="foods.goodsImg" width="100%">
                     </span>
@@ -57,9 +57,45 @@
                 </ul>
               </div>
             </el-tab-pane>
-            <el-tab-pane label="小食">小食</el-tab-pane>
-            <el-tab-pane label="饮料">饮料</el-tab-pane>
-            <el-tab-pane label="套餐">套餐</el-tab-pane>
+            <el-tab-pane label="小食">
+              <div>
+                <ul class="foodCook">
+                  <li v-for="foods in foodsDate2" class="animated bounceInDown">
+                    <span class="foodsImg">
+                      <img :src="foods.goodsImg" width="100%">
+                    </span>
+                    <span class="foodsName">{{foods.goodsName}}</span>
+                    <span class="foodsPrice">￥{{foods.price}}元</span>
+                  </li>
+                </ul>
+              </div>
+            </el-tab-pane>
+            <el-tab-pane label="饮料">
+              <div>
+                <ul class="foodCook">
+                  <li v-for="foods in foodsDate3" class="animated bounceInLeft">
+                    <span class="foodsImg">
+                      <img :src="foods.goodsImg" width="100%">
+                    </span>
+                    <span class="foodsName">{{foods.goodsName}}</span>
+                    <span class="foodsPrice">￥{{foods.price}}元</span>
+                  </li>
+                </ul>
+              </div>
+            </el-tab-pane>
+            <el-tab-pane label="套餐">
+              <div>
+                <ul class="foodCook">
+                  <li v-for="foods in foodsDate4" class="animated bounceInUp">
+                    <span class="foodsImg">
+                      <img :src="foods.goodsImg" width="100%">
+                    </span>
+                    <span class="foodsName">{{foods.goodsName}}</span>
+                    <span class="foodsPrice">￥{{foods.price}}元</span>
+                  </li>
+                </ul>
+              </div>
+            </el-tab-pane>
           </el-tabs>
         </div>
       </el-col>
@@ -68,6 +104,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'pos',
   data(){
@@ -95,103 +132,32 @@ export default {
           count:1
         }
       ],
-      dataOften:[
-        {
-            goodsId:1,
-            goodsName:'香辣鸡腿堡',
-            price:18
-        }, {
-            goodsId:2,
-            goodsName:'田园鸡腿堡',
-            price:15
-        }, {
-            goodsId:3,
-            goodsName:'和风汉堡',
-            price:15
-        }, {
-            goodsId:4,
-            goodsName:'快乐全家桶',
-            price:80
-        }, {
-            goodsId:5,
-            goodsName:'脆皮炸鸡腿',
-            price:10
-        }, {
-            goodsId:6,
-            goodsName:'魔法鸡块',
-            price:20
-        }, {
-            goodsId:7,
-            goodsName:'可乐大杯',
-            price:10
-        }, {
-            goodsId:8,
-            goodsName:'雪顶咖啡',
-            price:18
-        }, {
-            goodsId:9,
-            goodsName:'大块鸡米花',
-            price:15
-        }, {
-            goodsId:20,
-            goodsName:'香脆鸡柳',
-            price:17
-        }
-      ],
-      foodsDate:[
-        {
-            goodsId:1,
-            goodsImg:"http://7xjyw1.com1.z0.glb.clouddn.com/pos001.jpg",
-            goodsName:'香辣鸡腿堡',
-            price:18
-        }, {
-            goodsId:2,
-            goodsImg:"http://7xjyw1.com1.z0.glb.clouddn.com/pos002.jpg",
-            goodsName:'田园鸡腿堡',
-            price:15
-        }, {
-            goodsId:3,
-            goodsImg:"http://7xjyw1.com1.z0.glb.clouddn.com/pos004.jpg",
-            goodsName:'和风汉堡',
-            price:15
-        }, {
-            goodsId:4,
-              goodsImg:"http://7xjyw1.com1.z0.glb.clouddn.com/pos003.jpg",
-            goodsName:'快乐全家桶',
-            price:80
-        }, {
-            goodsId:5,
-              goodsImg:"http://7xjyw1.com1.z0.glb.clouddn.com/pos003.jpg",
-            goodsName:'脆皮炸鸡腿',
-            price:10
-        }, {
-            goodsId:6,
-              goodsImg:"http://7xjyw1.com1.z0.glb.clouddn.com/pos004.jpg",
-            goodsName:'魔法鸡块',
-            price:20
-        }, {
-            goodsId:7,
-              goodsImg:"http://7xjyw1.com1.z0.glb.clouddn.com/pos001.jpg",
-            goodsName:'可乐大杯',
-            price:10
-        }, {
-            goodsId:8,
-              goodsImg:"http://7xjyw1.com1.z0.glb.clouddn.com/pos003.jpg",
-            goodsName:'雪顶咖啡',
-            price:18
-        }, {
-            goodsId:9,
-              goodsImg:"http://7xjyw1.com1.z0.glb.clouddn.com/pos002.jpg",
-            goodsName:'大块鸡米花',
-            price:15
-        }, {
-            goodsId:20,
-              goodsImg:"http://7xjyw1.com1.z0.glb.clouddn.com/pos002.jpg",
-            goodsName:'香脆鸡柳',
-            price:17
-        }
-      ]
+      dataOften:[],
+      foodsDate1:[],
+      foodsDate2:[],
+      foodsDate3:[],
+      foodsDate4:[],
     }
+  },
+  created(){
+    axios.get('http://jspang.com/DemoApi/oftenGoods.php')
+    .then(reponse=>{
+      this.dataOften = reponse.data;
+    })
+    .catch(error=>{
+      alert('网络错误，无法访问')
+    });
+
+    axios.get('http://jspang.com/DemoApi/typeGoods.php')
+    .then(reponse=>{
+      this.foodsDate1 = reponse.data[0];
+      this.foodsDate2 = reponse.data[1];
+      this.foodsDate3 = reponse.data[2];
+      this.foodsDate4 = reponse.data[3];
+    })
+    .catch(error=>{
+      alert('网络错误，无法访问')
+    });
   },
   mounted(){
     let orderHeight = document.body.clientHeight;
@@ -257,5 +223,10 @@ export default {
     font-size: 16px;
     padding-left: 10px;
     padding-top: 10px;
+  }
+  .often-list ul li {
+    animation-duration: 2s;
+    animation-delay: 0.2s;
+    animation-iteration-count: infinite;
   }
 </style>
