@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <left-nav></left-nav>
-    <div class="main">啦啦啦
+    <div class="main">啦啦啦cccc
       <router-view></router-view>
     </div>
   </div>
