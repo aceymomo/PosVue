@@ -11,10 +11,13 @@
               <el-table-column align="center" label="操作" width="100" fixed="right">
                 <template scope="scope">
                   <el-button type="text" size="small">删除</el-button>
-                  <el-button type="text" size="small">增加</el-button>
+                  <el-button type="text" size="small" @click="addOrderList(scope.row)">增加</el-button>
                 </template>
               </el-table-column>
             </el-table>
+            <div class="title-list">
+              <small>数量：</small>{{totalCount}}&nbsp;&nbsp;&nbsp;&nbsp;<small>金额：</small>{{totalPrice}}
+            </div>
             <div class="div-btn">
               <el-button type="warning">挂单</el-button>
               <el-button type="danger">删除</el-button>
@@ -34,7 +37,7 @@
           <div class="title">常用商品</div>
           <div class="often-list">
             <ul>
-              <li v-for="item in dataOften" class="animated pulse">
+              <li v-for="item in dataOften" class="animated pulse" @click="addOrderList(item)">
                 <span>{{item.goodsName}}</span>
                 <span class="oprice">￥{{item.price}}元</span>
               </li>
@@ -47,7 +50,7 @@
             <el-tab-pane label="汉堡">
               <div>
                 <ul class="foodCook">
-                  <li v-for="foods in foodsDate1" class="animated bounceInRight">
+                  <li v-for="foods in foodsDate1" class="animated bounceInRight" @click="addOrderList(foods)">
                     <span class="foodsImg">
                       <img :src="foods.goodsImg" width="100%">
                     </span>
@@ -60,7 +63,7 @@
             <el-tab-pane label="小食">
               <div>
                 <ul class="foodCook">
-                  <li v-for="foods in foodsDate2" class="animated bounceInDown">
+                  <li v-for="foods in foodsDate2" class="animated bounceInDown" @click="addOrderList(foods)">
                     <span class="foodsImg">
                       <img :src="foods.goodsImg" width="100%">
                     </span>
@@ -73,7 +76,7 @@
             <el-tab-pane label="饮料">
               <div>
                 <ul class="foodCook">
-                  <li v-for="foods in foodsDate3" class="animated bounceInLeft">
+                  <li v-for="foods in foodsDate3" class="animated bounceInLeft" @click="addOrderList(foods)">
                     <span class="foodsImg">
                       <img :src="foods.goodsImg" width="100%">
                     </span>
@@ -86,7 +89,7 @@
             <el-tab-pane label="套餐">
               <div>
                 <ul class="foodCook">
-                  <li v-for="foods in foodsDate4" class="animated bounceInUp">
+                  <li v-for="foods in foodsDate4" class="animated bounceInUp" @click="addOrderList(foods)">
                     <span class="foodsImg">
                       <img :src="foods.goodsImg" width="100%">
                     </span>
@@ -109,34 +112,14 @@ export default {
   name: 'pos',
   data(){
     return {
-      dataName:[
-        {
-          
-          goodsName: '可口可乐',
-          price: 8,
-          count:1
-        }, {
-          
-          goodsName: '香辣鸡腿堡',
-          price: 15,
-          count:1
-        }, {
-         
-          goodsName: '爱心薯条',
-          price: 8,
-          count:1
-        }, {
-         
-          goodsName: '甜筒',
-          price: 8,
-          count:1
-        }
-      ],
+      dataName:[],
       dataOften:[],
       foodsDate1:[],
       foodsDate2:[],
       foodsDate3:[],
       foodsDate4:[],
+      totalCount:0,
+      totalPrice:0,
     }
   },
   created(){
@@ -162,6 +145,31 @@ export default {
   mounted(){
     let orderHeight = document.body.clientHeight;
     document.getElementById('order-list').style.height = orderHeight + 'px';
+  },
+  methods:{
+   addOrderList(goods){
+     this.totalCount = 0;
+     this.totalPrice = 0;
+     let isHave = false;
+     for(let i of this.dataName){
+       if(i.goodsId == goods.goodsId){
+         isHave = true
+       }
+     }
+     if(isHave){
+       let arr = this.dataName.filter(o=>o.goodsId == goods.goodsId);
+       arr[0].count++;
+     }else{
+       let newData = {goodsId:goods.goodsId,goodsName:goods.goodsName,price:goods.price,count:1};
+       this.dataName.push(newData)
+     }
+
+     for(let j of this.dataName){
+       this.totalCount += j.count;
+       console.log(j.count);
+       this.totalPrice = this.totalPrice + (j.price * j.count);
+     }
+   } 
   }
 }
 </script>
@@ -189,6 +197,7 @@ export default {
     padding: 10px;
     margin: 5px;
     background-color: #fff;
+    cursor: pointer;
   }
   .oprice{
     color:#58B7FF;
@@ -206,6 +215,7 @@ export default {
     padding: 2px;
     float: left;
     margin: 2px;
+    cursor: pointer;
   }
   .foodCook li span{
     display: block;
@@ -215,12 +225,13 @@ export default {
     width: 40%
   }
   .foodsName{
-    font-size: 18px;
+    font-size: 22px;
     padding-left: 10px;
+    padding-right: 20px;
     color:brown;
   }
   .foodsPrice{
-    font-size: 16px;
+    font-size: 18px;
     padding-left: 10px;
     padding-top: 10px;
   }
@@ -228,5 +239,10 @@ export default {
     animation-duration: 2s;
     animation-delay: 0.2s;
     animation-iteration-count: infinite;
+  }
+  .title-list{
+    background-color: #fff;
+    padding: 10px;
+    border-bottom: 1px solid #dfe6ec;
   }
 </style>

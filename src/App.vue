@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <left-nav></left-nav>
-    <div class="main">啦啦啦cccc
+    <div class="main">
       <router-view></router-view>
     </div>
   </div>
@@ -19,7 +19,7 @@ export default {
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Microsoft Yahei','Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
