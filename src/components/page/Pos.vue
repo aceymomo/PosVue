@@ -10,7 +10,7 @@
               <el-table-column align="center" prop="price" label="金额" width="70"></el-table-column>
               <el-table-column align="center" label="操作" width="100" fixed="right">
                 <template scope="scope">
-                  <el-button type="text" size="small">删除</el-button>
+                  <el-button type="text" size="small" @click="delOrderList(scope.row)">删除</el-button>
                   <el-button type="text" size="small" @click="addOrderList(scope.row)">增加</el-button>
                 </template>
               </el-table-column>
@@ -20,8 +20,8 @@
             </div>
             <div class="div-btn">
               <el-button type="warning">挂单</el-button>
-              <el-button type="danger">删除</el-button>
-              <el-button type="success">结账</el-button>
+              <el-button type="danger" @click="delAllList()">删除</el-button>
+              <el-button type="success" @click="checkOut()">结账</el-button>
             </div>
           </el-tab-pane>
           <el-tab-pane label="挂单">
@@ -163,11 +163,38 @@ export default {
        let newData = {goodsId:goods.goodsId,goodsName:goods.goodsName,price:goods.price,count:1};
        this.dataName.push(newData)
      }
-
-     for(let j of this.dataName){
-       this.totalCount += j.count;
-       console.log(j.count);
-       this.totalPrice = this.totalPrice + (j.price * j.count);
+     this.getAllMethod();
+   },
+   delOrderList(goods){
+     this.dataName = this.dataName.filter(o=>o.goodsId != goods.goodsId);
+     this.getAllMethod();
+   },
+   getAllMethod(){
+     this.totalCount = 0;
+     this.totalPrice = 0;
+     if(this.dataName){
+       for(let j of this.dataName){
+        this.totalCount += j.count;
+        this.totalPrice = this.totalPrice + (j.price * j.count);
+       }
+     }
+   },
+   delAllList(){
+     this.totalCount = 0;
+     this.totalPrice = 0;
+     this.dataName = []
+   },
+   checkOut(){
+     if(this.totalCount){
+       this.totalCount = 0;
+       this.totalPrice = 0;
+       this.dataName = [];
+       this.$message({
+         message:'结账成功，感谢你又为店里出了一份力!',
+         type:'success'
+       })
+     }else{
+       this.$message.error('不能空结。老板了解你急切的心情!')
      }
    } 
   }
