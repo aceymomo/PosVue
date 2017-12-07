@@ -1,30 +1,26 @@
-# vue-demo1
+# PosVue
 
-> A Vue.js project
+> 基于Vue.js2.0开发的快餐点餐收银系统...
 
-## Build Setup
+## 技术栈
+
+> Vue.js
+
+> Vue-router
+
+> Axios
+
+## 本地运行
 
 ``` bash
-# install dependencies
+# 安装依赖
 npm install
 
-# serve with hot reload at localhost:8080
+# 运行
 npm run dev
 
-# build for production with minification
+# 打包
 npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
