@@ -4,11 +4,25 @@
 
 ## 技术栈
 
-> Vue.js
+> [Vue.js](https://cn.vuejs.org/)
 
-> Vue-router
+> [Vue-router](https://router.vuejs.org/zh-cn/)
 
-> Axios
+> [Axios](https://www.kancloud.cn/yunye/axios/234845)
+
+## 效果预览
+
+1、商品添加
+
+![image](https://github.com/aceymomo/imagePage/blob/master/gif/pos1.gif)
+
+2、商品删除
+
+![image](https://github.com/aceymomo/imagePage/blob/master/gif/pos2.gif)
+
+3、结账
+
+![image](https://github.com/aceymomo/imagePage/blob/master/gif/pos3.gif)
 
 ## 本地运行
 
